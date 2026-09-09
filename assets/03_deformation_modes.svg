@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#4E2A84"/></marker>
+  </defs>
+  <style>
+    .t { fill:#4E2A84; font-weight:700; }
+    .s { fill:#6b6b6b; font-size:11.5px; }
+    .ref { fill:none; stroke:#c9c4d6; stroke-width:1.5; stroke-dasharray:4 4; }
+    .def { fill:#f5f1fb; stroke:#4E2A84; stroke-width:2; }
+    .ar { stroke:#4E2A84; stroke-width:2; marker-end:url(#ah); }
+    .code { fill:#7a5aa8; font-family:'SF Mono', Consolas, monospace; font-size:10.5px; }
+  </style>
+
+  <text x="450" y="30" text-anchor="middle" font-size="20" class="t">Four ways to deform a simulation box</text>
+  <text x="450" y="50" text-anchor="middle" class="s">Dashed = original shape. Purple = deformed. In LAMMPS these are all one command: fix deform.</text>
+
+  <!-- Tensile -->
+  <text x="130" y="90" text-anchor="middle" font-size="14" class="t">Tensile (uniaxial)</text>
+  <rect x="95" y="110" width="70" height="70" class="ref"/>
+  <rect x="80" y="110" width="100" height="70" class="def"/>
+  <line class="ar" x1="75" y1="145" x2="45" y2="145"/>
+  <line class="ar" x1="185" y1="145" x2="215" y2="145"/>
+  <text x="130" y="205" text-anchor="middle" class="s">pull along one axis</text>
+  <text x="130" y="222" text-anchor="middle" class="code">fix ... deform 1 x erate ${e}</text>
+
+  <!-- Compression -->
+  <text x="360" y="90" text-anchor="middle" font-size="14" class="t">Compression</text>
+  <rect x="325" y="110" width="70" height="70" class="ref"/>
+  <rect x="338" y="110" width="44" height="70" class="def"/>
+  <line class="ar" x1="315" y1="145" x2="336" y2="145"/>
+  <line class="ar" x1="405" y1="145" x2="384" y2="145"/>
+  <text x="360" y="205" text-anchor="middle" class="s">push along one axis</text>
+  <text x="360" y="222" text-anchor="middle" class="code">fix ... deform 1 x erate -${e}</text>
+
+  <!-- Shear -->
+  <text x="590" y="90" text-anchor="middle" font-size="14" class="t">Shear</text>
+  <rect x="555" y="110" width="70" height="70" class="ref"/>
+  <polygon points="575,110 645,110 625,180 555,180" class="def"/>
+  <line class="ar" x1="555" y1="105" x2="600" y2="105"/>
+  <text x="590" y="205" text-anchor="middle" class="s">slide top past bottom</text>
+  <text x="590" y="222" text-anchor="middle" class="code">fix ... deform 1 xy erate ${e}</text>
+
+  <!-- Dilation -->
+  <text x="810" y="90" text-anchor="middle" font-size="14" class="t">Dilation (volumetric)</text>
+  <rect x="790" y="122" width="46" height="46" class="ref"/>
+  <rect x="778" y="110" width="70" height="70" class="def"/>
+  <line class="ar" x1="775" y1="107" x2="762" y2="94"/>
+  <line class="ar" x1="851" y1="183" x2="864" y2="196"/>
+  <text x="813" y="205" text-anchor="middle" class="s">expand all axes equally</text>
+  <text x="813" y="222" text-anchor="middle" class="code">deform x,y,z erate ${e}</text>
+
+  <!-- caption -->
+  <rect x="60" y="255" width="780" height="62" rx="10" fill="#f5f1fb" stroke="#d7d3e0"/>
+  <text x="450" y="278" text-anchor="middle" font-size="12.5" fill="#2b2b2b"><tspan font-weight="700" fill="#4E2A84">The idea:</tspan> you impose a known deformation (strain) and let LAMMPS report the resisting force per area (stress).</text>
+  <text x="450" y="298" text-anchor="middle" font-size="12.5" fill="#2b2b2b">The relationship between the two — the stress–strain curve — is the material's mechanical fingerprint.</text>
+</svg>

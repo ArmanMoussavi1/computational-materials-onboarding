@@ -1,0 +1,67 @@
+<svg viewBox="0 0 900 440" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <style>
+      .title  { fill:#2b1a4d; font-weight:700; }
+      .sub    { fill:#6b6b6b; }
+      .card   { fill:#ffffff; stroke:#4E2A84; stroke-width:2; }
+      .hdr    { fill:#4E2A84; font-weight:700; }
+      .hsub   { fill:#8a6d1f; font-weight:600; }
+      .body   { fill:#333333; }
+      .mlabel { fill:#4E2A84; font-weight:600; }
+      .dlabel { fill:#8a5a00; font-weight:600; }
+      .foot   { fill:#4E2A84; font-weight:600; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#4E2A84"/>
+    </marker>
+    <marker id="arrowGold" markerWidth="11" markerHeight="11" refX="7" refY="3.2" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3.2 L0,6.4 Z" fill="#e6a817"/>
+    </marker>
+  </defs>
+
+  <text x="450" y="32" text-anchor="middle" font-size="22" class="title">A chain of three links: processing to structure to property</text>
+  <text x="450" y="56" text-anchor="middle" font-size="14" class="sub">The forward arrow is discovery. The backward arrow is design.</text>
+
+  <!-- Stage A: Processing -->
+  <rect x="30"  y="86" width="240" height="118" rx="12" class="card"/>
+  <text x="150" y="116" text-anchor="middle" font-size="17" class="hdr">PROCESSING</text>
+  <text x="150" y="136" text-anchor="middle" font-size="12" class="hsub">the conditions</text>
+  <text x="150" y="162" text-anchor="middle" font-size="12.5" class="body">synthesis &#183; concentration</text>
+  <text x="150" y="180" text-anchor="middle" font-size="12.5" class="body">temperature &#183; kinetics</text>
+
+  <!-- Stage B: Structure -->
+  <rect x="330" y="86" width="240" height="118" rx="12" class="card"/>
+  <text x="450" y="116" text-anchor="middle" font-size="17" class="hdr">STRUCTURE</text>
+  <text x="450" y="136" text-anchor="middle" font-size="12" class="hsub">the topology</text>
+  <text x="450" y="162" text-anchor="middle" font-size="12.5" class="body">networks &#183; crosslinks</text>
+  <text x="450" y="180" text-anchor="middle" font-size="12.5" class="body">entanglements &#183; phases</text>
+
+  <!-- Stage C: Property -->
+  <rect x="630" y="86" width="240" height="118" rx="12" class="card"/>
+  <text x="750" y="116" text-anchor="middle" font-size="17" class="hdr">PROPERTY</text>
+  <text x="750" y="136" text-anchor="middle" font-size="12" class="hsub">the mechanical response</text>
+  <text x="750" y="162" text-anchor="middle" font-size="12.5" class="body">stiffness &#183; strength</text>
+  <text x="750" y="180" text-anchor="middle" font-size="12.5" class="body">toughness &#183; fracture</text>
+
+  <!-- Forward arrow A -> B -->
+  <line x1="272" y1="130" x2="326" y2="130" stroke="#4E2A84" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="299" y="120" text-anchor="middle" font-size="11" class="mlabel">forms</text>
+  <text x="299" y="176" text-anchor="middle" font-size="10.5" class="sub">self-assembly,</text>
+  <text x="299" y="189" text-anchor="middle" font-size="10.5" class="sub">phase separation</text>
+
+  <!-- Forward arrow B -> C -->
+  <line x1="572" y1="130" x2="626" y2="130" stroke="#4E2A84" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="599" y="120" text-anchor="middle" font-size="11" class="mlabel">governs</text>
+  <text x="599" y="176" text-anchor="middle" font-size="10.5" class="sub">molecular dynamics,</text>
+  <text x="599" y="189" text-anchor="middle" font-size="10.5" class="sub">AI for materials</text>
+
+  <!-- Backward design arrow C -> A -->
+  <path d="M 748 208 C 748 300, 152 300, 152 210" fill="none" stroke="#e6a817" stroke-width="3" marker-end="url(#arrowGold)"/>
+  <text x="450" y="291" text-anchor="middle" font-size="13" class="dlabel">DESIGN &#8212; a desired response must trace back to the conditions that produce it</text>
+  <text x="450" y="309" text-anchor="middle" font-size="11.5" class="sub">theory &#183; inverse design</text>
+
+  <!-- Footer band -->
+  <rect x="30" y="352" width="840" height="66" rx="10" fill="#4E2A84"/>
+  <text x="450" y="380" text-anchor="middle" font-size="14" fill="#ffffff" font-weight="600">Read left to right, you are doing discovery. Read right to left, you are doing design.</text>
+  <text x="450" y="403" text-anchor="middle" font-size="12.5" fill="#e9dff7">This tutorial builds the tools for both directions &#8212; and toward materials that manage their own behavior.</text>
+</svg>

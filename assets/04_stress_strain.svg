@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 460" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <style>
+    .t { fill:#4E2A84; font-weight:700; }
+    .s { fill:#4b4b4b; font-size:12.5px; }
+    .ax { stroke:#888; stroke-width:1.5; }
+    .curve { fill:none; stroke:#4E2A84; stroke-width:3; }
+    .guide { stroke:#e6a817; stroke-width:1.6; stroke-dasharray:5 4; }
+    .pt { fill:#e6a817; }
+  </style>
+
+  <text x="410" y="34" text-anchor="middle" font-size="20" class="t">Reading a stress–strain curve</text>
+
+  <!-- axes -->
+  <line class="ax" x1="90" y1="380" x2="760" y2="380"/>
+  <line class="ax" x1="90" y1="380" x2="90" y2="70"/>
+  <text x="425" y="415" text-anchor="middle" class="s">Strain  &#949;  =  &#916;L / L&#8320;   (how much you stretched it)</text>
+  <text x="34" y="225" text-anchor="middle" class="s" transform="rotate(-90 34 225)">Stress  &#963;  =  Force / Area</text>
+
+  <!-- toughness shaded area under curve -->
+  <path d="M90,380 L150,250 L260,150 L420,120 L560,140 L640,300 L660,378 Z" fill="#f0e9fa" stroke="none"/>
+
+  <!-- the curve -->
+  <path class="curve" d="M90,380 L150,250 L260,150 L420,120 L560,140 L640,300 L660,378"/>
+
+  <!-- elastic slope triangle -->
+  <line class="guide" x1="90" y1="380" x2="180" y2="380"/>
+  <line class="guide" x1="180" y1="380" x2="180" y2="185"/>
+  <text x="205" y="300" class="s" fill="#b8860b">slope here = <tspan font-weight="700">Young's modulus E</tspan></text>
+  <text x="205" y="318" class="s" fill="#b8860b">(stiffness — resistance to small stretch)</text>
+
+  <!-- yield -->
+  <circle cx="260" cy="150" r="5" class="pt"/>
+  <text x="255" y="138" text-anchor="middle" class="s" fill="#b8860b">yield</text>
+  <text x="150" y="120" text-anchor="middle" class="s">elastic</text>
+  <text x="150" y="136" text-anchor="middle" class="s">(springs back)</text>
+
+  <!-- peak / ultimate -->
+  <circle cx="420" cy="120" r="5" class="pt"/>
+  <text x="420" y="106" text-anchor="middle" class="s" fill="#b8860b">peak = ultimate stress</text>
+
+  <!-- fracture -->
+  <circle cx="640" cy="300" r="5" class="pt"/>
+  <text x="690" y="290" text-anchor="middle" class="s" fill="#b8860b">fracture</text>
+  <text x="690" y="306" text-anchor="middle" class="s" fill="#b8860b">(it breaks)</text>
+
+  <!-- plateau label -->
+  <text x="480" y="175" text-anchor="middle" class="s">plastic / strain-hardening</text>
+
+  <!-- toughness caption -->
+  <text x="360" y="255" text-anchor="middle" class="s" fill="#7a5aa8" font-weight="700">shaded area = toughness</text>
+  <text x="360" y="272" text-anchor="middle" class="s" fill="#7a5aa8">(total energy absorbed before breaking)</text>
+
+  <!-- legend box -->
+  <rect x="90" y="428" width="670" height="26" rx="8" fill="#f5f1fb" stroke="#d7d3e0"/>
+  <text x="425" y="446" text-anchor="middle" font-size="12" fill="#2b2b2b">Stiff = steep start &#183; Strong = tall peak &#183; Tough = large area &#183; Ductile = long tail before fracture</text>
+</svg>

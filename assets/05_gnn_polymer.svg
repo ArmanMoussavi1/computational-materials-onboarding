@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ag" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#4E2A84"/></marker>
+  </defs>
+  <style>
+    .t { fill:#4E2A84; font-weight:700; }
+    .s { fill:#6b6b6b; font-size:12px; }
+    .box { fill:#ffffff; stroke:#d7d3e0; stroke-width:1.5; }
+    .fl { stroke:#4E2A84; stroke-width:2.5; fill:none; marker-end:url(#ag); }
+    .edge { stroke:#4E2A84; stroke-width:1.6; }
+    .ent { stroke:#e6a817; stroke-width:1.6; stroke-dasharray:4 3; }
+  </style>
+
+  <text x="450" y="30" text-anchor="middle" font-size="20" class="t">How TANGO "sees" a material</text>
+  <text x="450" y="50" text-anchor="middle" class="s">The network's wiring diagram goes in; the full stress–strain curve comes out — no new simulation needed.</text>
+
+  <!-- graph -->
+  <rect x="40" y="80" width="230" height="220" rx="12" class="box"/>
+  <text x="155" y="106" text-anchor="middle" font-size="13" class="t">1. Network &#8594; graph</text>
+  <g class="edge">
+    <line x1="90" y1="150" x2="140" y2="135"/><line x1="140" y1="135" x2="200" y2="150"/>
+    <line x1="90" y1="150" x2="110" y2="210"/><line x1="200" y1="150" x2="185" y2="215"/>
+    <line x1="110" y1="210" x2="185" y2="215"/><line x1="140" y1="135" x2="110" y2="210"/>
+    <line x1="140" y1="135" x2="185" y2="215"/>
+  </g>
+  <line class="ent" x1="90" y1="150" x2="200" y2="150"/>
+  <g fill="#4E2A84"><circle cx="90" cy="150" r="7"/><circle cx="200" cy="150" r="7"/><circle cx="110" cy="210" r="7"/><circle cx="185" cy="215" r="7"/></g>
+  <g fill="#e6a817"><circle cx="140" cy="135" r="8"/></g>
+  <text x="155" y="255" text-anchor="middle" class="s"><tspan fill="#4E2A84">&#9679;</tspan> chains &#160; <tspan fill="#e6a817">&#9679;</tspan> crosslinkers</text>
+  <text x="155" y="275" text-anchor="middle" class="s"><tspan fill="#e6a817">- -</tspan> entanglements = extra edges</text>
+
+  <!-- message passing -->
+  <rect x="335" y="80" width="230" height="220" rx="12" class="box"/>
+  <text x="450" y="106" text-anchor="middle" font-size="13" class="t">2. Message passing</text>
+  <circle cx="450" cy="175" r="34" fill="#f5f1fb" stroke="#4E2A84" stroke-width="1.6"/>
+  <g fill="#4E2A84"><circle cx="410" cy="150" r="6"/><circle cx="490" cy="150" r="6"/><circle cx="410" cy="205" r="6"/><circle cx="490" cy="205" r="6"/></g>
+  <g class="fl"><line x1="416" y1="153" x2="440" y2="168"/></g>
+  <g class="fl"><line x1="484" y1="153" x2="460" y2="168"/></g>
+  <g class="fl"><line x1="416" y1="202" x2="440" y2="184"/></g>
+  <g class="fl"><line x1="484" y1="202" x2="460" y2="184"/></g>
+  <text x="450" y="180" text-anchor="middle" class="s">node</text>
+  <text x="450" y="250" text-anchor="middle" class="s">each node updates itself from</text>
+  <text x="450" y="267" text-anchor="middle" class="s">its neighbors, over and over</text>
+
+  <!-- prediction -->
+  <rect x="630" y="80" width="230" height="220" rx="12" class="box"/>
+  <text x="745" y="106" text-anchor="middle" font-size="13" class="t">3. Predicted response</text>
+  <line x1="665" y1="255" x2="835" y2="255" stroke="#999" stroke-width="1"/>
+  <line x1="665" y1="255" x2="665" y2="130" stroke="#999" stroke-width="1"/>
+  <polyline points="665,255 700,190 745,165 790,180 820,250" fill="none" stroke="#4E2A84" stroke-width="2.5"/>
+  <polyline points="665,255 700,200 745,178 790,205 815,255" fill="none" stroke="#e6a817" stroke-width="2" stroke-dasharray="5 4"/>
+  <text x="745" y="285" text-anchor="middle" class="s"><tspan fill="#4E2A84">&#8212;</tspan> MD truth &#160; <tspan fill="#e6a817">- -</tspan> TANGO prediction</text>
+
+  <line class="fl" x1="272" y1="190" x2="332" y2="190"/>
+  <line class="fl" x1="567" y1="190" x2="627" y2="190"/>
+
+  <rect x="40" y="330" width="820" height="40" rx="10" fill="#f5f1fb" stroke="#d7d3e0"/>
+  <text x="450" y="355" text-anchor="middle" font-size="12.5" fill="#2b2b2b"><tspan font-weight="700" fill="#4E2A84">Why a graph?</tspan> Because in a polymer network, <tspan font-style="italic">what is connected to what</tspan> — not raw coordinates — sets the mechanics.</text>
+</svg>

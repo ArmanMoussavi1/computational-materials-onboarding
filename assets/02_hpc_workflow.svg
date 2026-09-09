@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a2" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#4E2A84"/></marker>
+  </defs>
+  <style>
+    .box { fill:#ffffff; stroke:#d7d3e0; stroke-width:1.5; }
+    .t { fill:#4E2A84; font-weight:700; }
+    .s { fill:#6b6b6b; font-size:12px; }
+    .cmd { fill:#4E2A84; font-family:'SF Mono', Consolas, monospace; font-size:12px; }
+    .fl { stroke:#4E2A84; stroke-width:2.5; fill:none; marker-end:url(#a2); }
+  </style>
+
+  <text x="450" y="32" text-anchor="middle" font-size="20" class="t">How your work reaches the cluster</text>
+
+  <!-- laptop -->
+  <rect x="30" y="120" width="150" height="100" rx="10" class="box"/>
+  <rect x="55" y="145" width="100" height="55" rx="4" fill="#f5f1fb" stroke="#b08fd6"/>
+  <rect x="45" y="200" width="120" height="8" rx="2" fill="#d7d3e0"/>
+  <text x="105" y="240" text-anchor="middle" font-size="14" class="t">Your laptop</text>
+  <text x="105" y="258" text-anchor="middle" class="s">edit code, plots</text>
+
+  <!-- login node -->
+  <rect x="270" y="120" width="170" height="100" rx="10" class="box"/>
+  <text x="355" y="150" text-anchor="middle" font-size="14" class="t">Quest login node</text>
+  <text x="355" y="172" text-anchor="middle" class="s">where you land after ssh</text>
+  <text x="355" y="192" text-anchor="middle" class="s">edit files, submit jobs,</text>
+  <text x="355" y="208" text-anchor="middle" class="s">small tests only</text>
+
+  <!-- scheduler -->
+  <rect x="530" y="120" width="150" height="100" rx="10" class="box"/>
+  <text x="605" y="150" text-anchor="middle" font-size="14" class="t">SLURM</text>
+  <text x="605" y="170" text-anchor="middle" class="s">the scheduler:</text>
+  <text x="605" y="186" text-anchor="middle" class="s">a fair queue that</text>
+  <text x="605" y="202" text-anchor="middle" class="s">hands out nodes</text>
+
+  <!-- compute nodes -->
+  <rect x="760" y="95" width="110" height="150" rx="10" class="box"/>
+  <text x="815" y="120" text-anchor="middle" font-size="14" class="t">Compute</text>
+  <text x="815" y="136" text-anchor="middle" font-size="14" class="t">nodes</text>
+  <g fill="#f5f1fb" stroke="#4E2A84" stroke-width="1.2">
+    <rect x="775" y="150" width="35" height="25" rx="3"/><rect x="820" y="150" width="35" height="25" rx="3"/>
+    <rect x="775" y="185" width="35" height="25" rx="3"/><rect x="820" y="185" width="35" height="25" rx="3"/>
+  </g>
+  <text x="815" y="230" text-anchor="middle" class="s">the real muscle</text>
+
+  <!-- flows -->
+  <line class="fl" x1="182" y1="170" x2="266" y2="170"/>
+  <text x="224" y="160" text-anchor="middle" class="cmd">ssh</text>
+  <line class="fl" x1="442" y1="170" x2="526" y2="170"/>
+  <text x="484" y="160" text-anchor="middle" class="cmd">sbatch</text>
+  <line class="fl" x1="682" y1="170" x2="756" y2="170"/>
+  <text x="719" y="160" text-anchor="middle" class="cmd">runs</text>
+
+  <!-- warning -->
+  <rect x="30" y="290" width="840" height="48" rx="10" fill="#fff6e6" stroke="#e6a817"/>
+  <text x="50" y="312" font-size="18">&#9888;</text>
+  <text x="450" y="311" text-anchor="middle" font-size="13" fill="#2b2b2b"><tspan font-weight="700">Golden rule:</tspan> never run a real simulation on the login node. It is shared by everyone.</text>
+  <text x="450" y="329" text-anchor="middle" font-size="13" fill="#2b2b2b">Always send heavy work to the compute nodes with <tspan class="cmd">sbatch</tspan> (batch) or <tspan class="cmd">srun --pty bash</tspan> (interactive).</text>
+</svg>

@@ -1,0 +1,106 @@
+# =============================================================================
+#  deform.in  —  deform a coarse-grained polymer system and record stress vs strain
+#
+#  One script, four deformation modes. Choose the mode at launch:
+#     lmp -in deform.in -var mode tensile     -var erate 1.0e-3
+#     lmp -in deform.in -var mode compression -var erate 1.0e-3
+#     lmp -in deform.in -var mode shear       -var erate 1.0e-3
+#     lmp -in deform.in -var mode dilation    -var erate 1.0e-3
+#
+#  Output: stress_strain.txt  (two columns: strain  stress, in LJ units)
+#          Feed it straight into scripts/stress_strain.py.
+#
+#  Units are Lennard-Jones (dimensionless), the natural language of coarse-grained
+#  models. This is a Kremer-Grest bead-spring melt: excluded-volume beads joined
+#  by finitely-extensible (FENE) springs. It mirrors the systems you build with
+#  build_polymer_systems/build_melt.py.
+#
+#  Canonical reference for the bead-spring setup: LAMMPS bench/in.chain and the
+#  fix-deform examples in the LAMMPS distribution.
+# =============================================================================
+
+# ---------- knobs (override any of these on the command line with -var) ------
+variable mode        index tensile        # tensile | compression | shear | dilation
+variable erate       index 1.0e-3         # engineering strain rate (per LJ time). Lower = more physical, slower.
+variable T           equal 1.0            # temperature (LJ units)
+variable totalstrain equal 1.0            # deform until we reach this strain
+variable datafile    string melt.data     # <-- output of build_melt.py
+
+# ---------- basics -----------------------------------------------------------
+units        lj
+atom_style   molecular            # supports bonds (+angles if your data file has them)
+boundary     p p p                # periodic in all directions
+read_data    ${datafile}
+
+# ---------- force field (match this block to what your data file contains) ----
+pair_style   lj/cut 2.5           # attractive LJ (cutoff 2.5) so the material can carry a tensile load
+pair_coeff   * * 1.0 1.0
+bond_style   fene
+bond_coeff   * 30.0 1.5 1.0 1.0   # K, R0, epsilon, sigma  (standard Kremer-Grest values)
+special_bonds fene
+# If your data file has an Angles section, add an angle_style here, e.g.:
+# angle_style cosine
+# angle_coeff * 1.5
+
+neighbor     0.5 bin
+neigh_modify every 1 delay 0 check yes
+
+# ---------- relax, then equilibrate at temperature ---------------------------
+velocity     all create ${T} 12345 mom yes rot yes dist gaussian
+minimize     1.0e-4 1.0e-6 1000 10000          # remove bad overlaps from the initial build
+reset_timestep 0
+timestep     0.005
+
+fix          eq all npt temp ${T} ${T} 0.5 iso 0.0 0.0 5.0
+run          20000                              # let the box find its equilibrium density
+unfix        eq
+
+# ---------- remember the undeformed box --------------------------------------
+variable     lx0 equal lx
+variable     ly0 equal ly
+reset_timestep 0
+
+# ---------- define what "strain" and "stress" mean for this mode -------------
+# stress = -(pressure component), the material's resisting force per area (LJ units)
+if "${mode} == shear" then &
+  "variable strain equal xy/v_ly0" &
+  "variable stress equal -pxy" &
+else &
+  "variable strain equal (lx-v_lx0)/v_lx0" &
+  "variable stress equal -pxx"
+
+# ---------- stream strain & stress to a file ---------------------------------
+thermo       1000
+thermo_style custom step temp v_strain v_stress pxx pyy pzz pxy vol
+# NOTE: the dollar signs are escaped (\$) so LAMMPS re-evaluates strain & stress at
+# EVERY print step, instead of substituting a single value once when the fix is defined.
+fix          out all print 1000 "\${strain} \${stress}" &
+             file stress_strain.txt screen no title "# strain stress"
+
+# ---------- apply the deformation --------------------------------------------
+# tensile / compression: pull (or push) x, let y & z relax to zero pressure -> uniaxial
+if "${mode} == tensile" then &
+  "fix 1 all npt temp ${T} ${T} 0.5 y 0.0 0.0 5.0 z 0.0 0.0 5.0" &
+  "fix 2 all deform 1 x erate ${erate} remap x"
+
+if "${mode} == compression" then &
+  "fix 1 all npt temp ${T} ${T} 0.5 y 0.0 0.0 5.0 z 0.0 0.0 5.0" &
+  "fix 2 all deform 1 x erate -${erate} remap x"
+
+# shear: tilt the box (needs a triclinic box), keep volume, thermostat only
+if "${mode} == shear" then &
+  "change_box all triclinic" &
+  "fix 1 all nvt temp ${T} ${T} 0.5" &
+  "fix 2 all deform 1 xy erate ${erate} remap x"
+
+# dilation: expand all three axes equally (pure volume change)
+if "${mode} == dilation" then &
+  "fix 1 all nvt temp ${T} ${T} 0.5" &
+  "fix 2 all deform 1 x erate ${erate} y erate ${erate} z erate ${erate} remap x"
+
+# ---------- run until we reach the target strain -----------------------------
+# strain = erate * time = erate * (nsteps * dt)  ->  nsteps = totalstrain / (erate*dt)
+variable     nsteps equal round(${totalstrain}/(${erate}*dt))
+# also save snapshots for visualization in OVITO / VMD
+dump         traj all custom 5000 deform.lammpstrj id mol type x y z
+run          ${nsteps}
