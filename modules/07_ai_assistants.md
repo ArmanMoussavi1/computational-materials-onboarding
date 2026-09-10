@@ -102,7 +102,7 @@ your name clean.
 3. **Never fabricate.** Don't let a model generate data, fill in a missing number, or
    invent a citation. This is research misconduct, full stop, regardless of intent.
 4. **Be transparent.** Follow the norms of Northwestern, our field, and each journal
-   on disclosing AI assistance. When in doubt, disclose, and ask me.
+   on disclosing AI assistance. When in doubt, disclose.
 5. **Mind confidentiality.** Don't paste unpublished data, private results, or
    anything sensitive into an external tool without checking it's appropriate. Ask
    first.
