@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Simulation output
+*.lammpstrj
+*.dump
+*.restart
+log.lammps
+slurm-*.out
+slurm-*.err
+*.err
+*.log
+
+# Environments
+.venv/
+env/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
